@@ -22,6 +22,7 @@ public class Fruits : MonoBehaviour {
 			rb.AddExplosionForce(Random.Range(500, 1000), transform.position, 5f);
 			
 		}
+		Destroy(created,5);
 		Destroy(gameObject);
 	}
 }
