@@ -6,11 +6,7 @@ public class Fruits : MonoBehaviour {
 
 	public GameObject slicedFruitPrefab;
 	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown(KeyCode.Space)) { 
-		   createSlicedFruit();
-		}
-	}
+
 
 	public void createSlicedFruit()
 	{
@@ -25,4 +21,14 @@ public class Fruits : MonoBehaviour {
 		Destroy(created,5);
 		Destroy(gameObject);
 	}
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		Blade blade=other.GetComponent<Blade>();
+		if (!blade)
+		{
+			return;
+		}
+		createSlicedFruit();
+	}
+
 }
