@@ -11,6 +11,10 @@ public class Fruits : MonoBehaviour {
 	public void createSlicedFruit()
 	{
 		GameObject created = Instantiate(slicedFruitPrefab, transform.position, transform.rotation);
+
+		//Play sound 
+		FindObjectOfType<GameManager>().playSlicedSound();
+
 		Rigidbody[] rbOnSliced = created.GetComponentsInChildren<Rigidbody>();
 		foreach(Rigidbody rb in rbOnSliced)
 		{
@@ -24,6 +28,7 @@ public class Fruits : MonoBehaviour {
 	}
 	private void OnTriggerEnter2D(Collider2D other)
 	{
+		//Debug.Log("FRUITSS COLLIDEDDDD");
 		Blade blade=other.GetComponent<Blade>();
 		if (!blade)
 		{

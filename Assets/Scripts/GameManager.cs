@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class GameManager : MonoBehaviour {
     [Header("Score Elements")]
     public int score;
@@ -14,8 +15,13 @@ public class GameManager : MonoBehaviour {
     public GameObject gameOverPanel;
     public Text gameOverScorePanelText;
     public Text gameOverBestScorePanelText;
+
+    [Header("Sounds")]
+    public AudioClip[] sliceSounds;
+    private AudioSource audioSource;
     public void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         gameOverPanel.SetActive(false);
         GetScore();
     }
@@ -51,5 +57,10 @@ public class GameManager : MonoBehaviour {
             Destroy(g);
         }
         Time.timeScale = 1;
+    }
+    public void playSlicedSound()
+    {
+        AudioClip sound = sliceSounds[Random.Range(0,sliceSounds.Length)];
+        audioSource.PlayOneShot(sound);
     }
 }
