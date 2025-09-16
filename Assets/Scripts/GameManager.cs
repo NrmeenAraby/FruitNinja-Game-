@@ -4,9 +4,18 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
-
+    [Header("Score Elements")]
     public int score;
     public Text scoreText;
+
+    [Header("GameOver")]
+    public GameObject gameOverPanel;
+    public Text gameOverScorePanelText;
+
+    public void Awake()
+    {
+        gameOverPanel.SetActive(false);
+    }
     public void IncreaseScore(int points)
     {
         score += points;
@@ -14,5 +23,19 @@ public class GameManager : MonoBehaviour {
     }
     public void OnBombHit() {
         Time.timeScale = 0;  //Stop the game
+        gameOverScorePanelText.text="Score: "+score.ToString();
+        gameOverPanel.SetActive(true);
+    }
+    public void RestartGame()
+    {
+        score = 0;
+        scoreText.text = "0";
+        gameOverPanel.SetActive(false);
+        gameOverScorePanelText.text = "Score: 0";
+        foreach(GameObject g in GameObject.FindGameObjectsWithTag("Interactable"))
+        {
+            Destroy(g);
+        }
+        Time.timeScale = 1;
     }
 }
